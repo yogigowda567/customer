@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/driver")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class PackersMoversController {
@@ -19,7 +19,7 @@ public class PackersMoversController {
         private MessageService messageService;
 
        
-        @PostMapping("/customerDetails")
+        @PostMapping("/driverDetails")
         public String customerDetails(@RequestBody Customer customer){
             userService.saveUser(customer);
             //messageService.sendMessage(customer);
@@ -28,6 +28,6 @@ public class PackersMoversController {
         
         
         @GetMapping("/ping")
-        public String ping() {  return "Hi this is Sandeep";}             
+        public String ping() {  return "Hi, this is driver micro-service";}             
 
     }
