@@ -1,14 +1,12 @@
 package com.naveen.packersmovers.controller;
-
 import com.naveen.packersmovers.messageservice.MessageService;
 import com.naveen.packersmovers.model.Customer;
 import com.naveen.packersmovers.service.PackersMoversService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/driver")
+@RequestMapping("/customer")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 
 public class PackersMoversController {
@@ -19,7 +17,7 @@ public class PackersMoversController {
         private MessageService messageService;
 
        
-        @PostMapping("/driverDetails")
+        @PostMapping("/customerDetails")
         public String customerDetails(@RequestBody Customer customer){
             userService.saveUser(customer);
             //messageService.sendMessage(customer);
@@ -28,6 +26,6 @@ public class PackersMoversController {
         
         
         @GetMapping("/ping")
-        public String ping() {  return "Hi, this is driver micro-service";}             
+        public String ping() {  return "Hi, this is customer micro-service";}             
 
     }
