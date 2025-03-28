@@ -2,7 +2,7 @@ FROM maven:3.9.4-amazoncorretto-17
 COPY /. /java/
 RUN mvn -f /java/pom.xml clean install
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "customer-1.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "/java/target/customer-1.0.1.jar"]
 
 
 
