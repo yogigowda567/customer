@@ -5,15 +5,6 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/java/target/customer-1.0.1.jar"]
 
 
-
-
-
-# FROM amazoncorretto:17
-# COPY target/customer-1.0.1.jar /
-# EXPOSE 8080
-# ENTRYPOINT ["java", "-jar", "customer-1.0.1.jar"]
-
-
 ################ MULTI STAGE DOCKER BUILD###########################
 
 ################ First Stage build ###########################
