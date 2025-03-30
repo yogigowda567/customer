@@ -9,11 +9,13 @@
 
 ################ First Stage build ###########################
 FROM maven:3.9.4-amazoncorretto-17 as build1
-COPY /. /java/
-RUN mvn -f /java/pom.xml clean install
+WORKDIR /java
+COPY ..
+RUN mvn clean install
 
 ########## Second Stage build ###########
 FROM amazoncorretto:17-alpine
 COPY --from=build1 /java/target/customer-1.0.1.jar /java/customer-1.0.1.jar
+WORKDIR /java
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/java/customer-1.0.1.jar"]
+ENTRYPOINT ["java","-jar","customer-1.0.1.jar"]
