@@ -15,7 +15,8 @@ RUN mvn clean install
 
 ########## Second Stage build ###########
 FROM amazoncorretto:17-alpine
-COPY --from=build1 /java/target/customer-1.0.1.jar /java/customer-1.0.1.jar
 WORKDIR /java
+COPY --from=build1 /java/target/customer-1.0.1.jar .
+# WORKDIR /java
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","customer-1.0.1.jar"]
