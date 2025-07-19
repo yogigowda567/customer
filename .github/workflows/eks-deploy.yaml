@@ -40,5 +40,5 @@ jobs:
     - name: Deploy with Helm
       run: |
         helm upgrade --install my-release ./helm-chart --namespace default \
-          --set image.repository=<your-account-id>.dkr.ecr.us-east-1.amazonaws.com/customer \
+          --set image.repository=229531317213.dkr.ecr.us-east-1.amazonaws.com/customer \
           --set image.tag=1
