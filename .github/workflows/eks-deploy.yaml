@@ -1,0 +1,44 @@
+name: Build and Deploy to EKS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Make sure your EC2 runner is properly registered
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Amazon ECR
+      env:
+        AWS_REGION: us-east-1  # Change to your region
+      run: |
+        aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.$AWS_REGION.amazonaws.com
+
+    - name: Build Docker image
+      run: |
+        docker build -t myapp:latest .
+
+    - name: Tag and Push to ECR
+      env:
+        AWS_REGION: us-east-1
+      run: |
+        IMAGE_URI=<your-account-id>.dkr.ecr.$AWS_REGION.amazonaws.com/myapp:latest
+        docker tag myapp:latest $IMAGE_URI
+        docker push $IMAGE_URI
+
+    - name: Update kubeconfig
+      run: aws eks --region us-east-1 update-kubeconfig --name <your-cluster-name>
+
+    - name: Deploy with Helm
+      run: |
+        helm upgrade --install myapp ./helm-chart --namespace default \
+          --set image.repository=<your-account-id>.dkr.ecr.us-east-1.amazonaws.com/myapp \
+          --set image.tag=latest
