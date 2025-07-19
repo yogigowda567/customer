@@ -30,12 +30,12 @@ jobs:
       env:
         AWS_REGION: us-east-2
       run: |
-        IMAGE_URI=<your-account-id>.dkr.ecr.$AWS_REGION.amazonaws.com/customer:1
+        IMAGE_URI=229531317213.dkr.ecr.$AWS_REGION.amazonaws.com/customer:1
         docker tag customer:1 $IMAGE_URI
         docker push $IMAGE_URI
 
     - name: Update kubeconfig
-      run: aws eks --region us-east-1 update-kubeconfig --name batch23-eks-cluster
+      run: aws eks --region us-east-2 update-kubeconfig --name batch23-eks-cluster
 
     - name: Deploy with Helm
       run: |
