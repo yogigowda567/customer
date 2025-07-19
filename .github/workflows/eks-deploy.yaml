@@ -20,7 +20,7 @@ jobs:
       env:
         AWS_REGION: us-east-2  # Change to your region
       run: |
-        aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin <your-account-id>.dkr.ecr.$AWS_REGION.amazonaws.com
+        aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 229531317213.dkr.ecr.$AWS_REGION.amazonaws.com
 
     - name: Build Docker image
       run: |
